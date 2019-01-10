@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "fir-app-611ef",
+    "staging": "fir-app-two",
+    "staging-b": "fir-app-611ef"
+  }
+}

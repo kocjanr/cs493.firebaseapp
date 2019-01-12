@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>CS493 Notes app</title>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+    <div>
+        <p>Test</p>
+    </div>
+  
+
+    <script>
+        
+        window.onload = function () {
+            console.log("here");
+            var container = document.getElementById("container");
+            
+            var i;
+            var foo = document.getElementById("container");
+            for(i=0;i<5;i++){
+                var element = document.createElement("a");
+                element.href ="dashboard.html?id="+i;
+                element.value = i;
+                element.name = "button";
+                element.id= "button"; 
+                element.innerText = "Button";
+
+                foo.appendChild(element); 
+                var br = document.createElement("br");
+                foo.append(br);
+            }
+
+            
+        };
+    </script>
+</body>
+
+</html>

@@ -9,11 +9,13 @@
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src=”https://apis.google.com/js/platform.js" async defer></script>
    
+   
     
 </head>
 
 <body>
     <div class="w3-auto form">
+        <a href="dashboard.html">Dashboard</a>
         <div class="w3-center">
             <input type="text" id="title" placeholder="title">
         </div>
@@ -26,25 +28,31 @@
     </div>
 
     <script>
+        //https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+            }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+
         function save(){
             var title = document.getElementById("title").value.toString();
             var note = document.getElementById("note").value.toString();
-            var d = new Date();
+            var uuid = guid();
 
             var db = firebase.database();
-
             db.ref('Notes').push({         
                 Title: title,         
-                Note: note   
+                Note: note,  
+                UUID: uuid 
             });
 
-            // firebase.database()
-            // .ref('Notes')
-            // .once('value')
-            // .then((snapshot)=> {
-            // var admins = snapshot.val();  
-            // console.log(admins);      
-            // }); 
+            
+
+            //window.location.href = 'dashboard.html';
         }
     </script>
 

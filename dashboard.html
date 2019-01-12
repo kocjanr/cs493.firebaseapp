@@ -21,6 +21,19 @@
     </div>
 
     <script>
+        function newNote() {
+            window.location.href = 'new.html';
+        }
+
+        function viewNote() {
+            sessionStorage.setItem("id", "-LVxeZ8-W3lTos7CSty3");
+            sessionStorage.setItem("title", "Hey");
+            sessionStorage.setItem("note", "bye");
+            console.log("HERE");
+
+            window.location.href = 'note.html';
+        }
+
         window.onload = function () {
             firebase.database()
                 .ref('Notes')
@@ -29,12 +42,18 @@
                     var response = snapshot.val();
                     console.log(response);
 
-                    for (x in response) {
-                        var element = response[x]
-                        console.log(element);
-                        document.getElementById("notes").innerHTML += element["Title"] + "<br>";
-                    }
+                    var notesDiv = document.getElementById("notes");
+                    for (var x in response) {
+                        var element = response[x];
+                        
+                        var a = document.createElement("a");
+                        a.href ="note.html?id="+x+"&title="+element["Title"]+"&note="+element["Note"];
+                        a.innerText = element["Title"];
 
+                        notesDiv.appendChild(a); 
+                        var br = document.createElement("br");
+                        notesDiv.append(br);
+                    }
                 });
         };
     </script>

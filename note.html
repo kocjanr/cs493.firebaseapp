@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <title>CS493 Notes app</title>
     <link rel="stylesheet" href="style.css" />
@@ -9,8 +10,8 @@
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src=”https://apis.google.com/js/platform.js" async defer></script>
     
-   
-    
+
+
 </head>
 
 <body>
@@ -22,7 +23,8 @@
             <input type="text" id="note" placeholder="note">
         </div>
         <div class="w3-center">
-            <button id="save" onclick="updateNote()">Update</button> <button id="delete" onclick="deleteNote()">Delete</button>
+            <button class="button" id="save" onclick="updateNote()">Update</button> <button class="button" id="delete"
+                onclick="deleteNote()">Delete</button>
         </div>
         <div>
             <a href="dashboard.html">Dashboard</a>
@@ -46,7 +48,7 @@
             console.log(noteId + " " + noteTitle + " " + noteNote);
         };
 
-        function deleteNote(){
+        function deleteNote() {
             var url_string = window.location.href
             var url = new URL(url_string);
             var noteId = url.searchParams.get("id");
@@ -55,21 +57,20 @@
             var updates = {};
             updates['Notes/' + noteId] = null;
             firebase.database().ref().update(updates);
-            //window.location.href = 'dashboard.html';
         }
 
-        function updateNote(){
+        function updateNote() {
             var title = document.getElementById("title").value;
             var note = document.getElementById("note").value;
 
             console.log(title);
             console.log(note);
-            
+
 
             var url_string = window.location.href
             var url = new URL(url_string);
             var noteId = url.searchParams.get("id");
-            
+
             var db = firebase.database();
             db.ref("Notes/" + noteId).update({ Title: title });
             db.ref("Notes/" + noteId).update({ Note: note });

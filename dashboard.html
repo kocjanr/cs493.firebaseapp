@@ -9,13 +9,13 @@
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src=”https://apis.google.com/js/platform.js" async defer></script>
-    
+   
 
 </head>
 
 <body>
     <div class="w3-auto form">
-        <button onclick="newNote()">New Note</button>
+        <button class="button" onclick="newNote()">New Note</button>
         <div id="notes">
         </div>
     </div>
@@ -26,11 +26,6 @@
         }
 
         function viewNote() {
-            sessionStorage.setItem("id", "-LVxeZ8-W3lTos7CSty3");
-            sessionStorage.setItem("title", "Hey");
-            sessionStorage.setItem("note", "bye");
-            console.log("HERE");
-
             window.location.href = 'note.html';
         }
 

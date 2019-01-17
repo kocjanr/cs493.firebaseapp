@@ -22,6 +22,9 @@
         <div class="w3-center">
             <input type="text" id="note" placeholder="note">
         </div>
+        <div id="fileURL" class="w3-center">
+            
+        </div>
         <div class="w3-center">
             <button class="button" id="save" onclick="updateNote()">Update</button> <button class="button" id="delete"
                 onclick="deleteNote()">Delete</button>
@@ -38,12 +41,21 @@
             var noteId = url.searchParams.get("id");
             var noteTitle = url.searchParams.get("title");
             var noteNote = url.searchParams.get("note");
+            var noteURL = url.searchParams.get("url");
 
             var title = document.getElementById("title");
             var note = document.getElementById("note");
+            var fileURL = document.getElementById("fileURL");
+
+
+            var a = document.createElement("a");
+            a.href = noteURL;
+            a.innerText = noteURL;
+            a.target ="_blank";
 
             title.value = noteTitle;
             note.value = noteNote;
+            fileURL.appendChild(a); 
 
             console.log(noteId + " " + noteTitle + " " + noteNote);
         };

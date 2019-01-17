@@ -10,11 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-
-
     
-
-
 </head>
 
 <body>
@@ -39,6 +35,8 @@
     </div>
 
     <script>
+
+        var documentURL = "";
         //https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
         function guid() {
             function s4() {
@@ -56,30 +54,39 @@
             let upload = document.getElementById('file-input');
             upload.addEventListener('change', uploadToFirebase, false);
 
-
             var uuid = guid();
 
             var db = firebase.database();
             db.ref('Notes').push({
                 Title: title,
                 Note: note,
-                UUID: uuid
+                UUID: uuid,
+                URL: documentURL
             });
         }
 
         function uploadToFirebase(files) {
-            console.log("jere");
-
-            let rootRef = firebase.storage().ref();
+            let rootRef = firebase.storage().ref('Notes/');
             let file = files[0];
-            let fileRef = rootRef.child(`Notes/${file.name}`);
-            fileRef.put(file)
-              .then(() => {
-                  console.log(file);
-                console.log('your images was uploaded !');
-            })
-            .catch(err => console.log(err));
-            
+            // let fileRef = rootRef.child(`Notes/${file.name}`);
+
+            // fileRef.put(file);
+            let worker = rootRef.put(file);
+            worker.on('state_changed',
+                (progress) => {
+                    console.log('progress')
+                }, (error) => {
+                    console.log('error')
+                }, (success) => {
+                    console.log('success')
+
+                    worker.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                        console.log('File available at', downloadURL);
+                        documentURL = downloadURL.toString();
+                    });
+                });
+
+            localStorage.setItem('user', JSON.stringify(firebase.auth()));
         }
 
     </script>

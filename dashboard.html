@@ -9,17 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src=”https://apis.google.com/js/platform.js" async defer></script>
-    <script>
-        var config = {
-            apiKey: "AIzaSyCcgA1fZaCrW9nCeWDQH3JwNIqafT7FL88",
-            authDomain: "fir-app-611ef.firebaseapp.com",
-            databaseURL: "https://fir-app-611ef.firebaseio.com",
-            projectId: "fir-app-611ef",
-            storageBucket: "fir-app-611ef.appspot.com",
-            messagingSenderId: "535142777242"
-        };
-        firebase.initializeApp(config);
-    </script>
+    
 
 </head>
 
@@ -52,7 +42,7 @@
                         var element = response[x];
                         
                         var a = document.createElement("a");
-                        a.href ="note.html?id="+x+"&title="+element["Title"]+"&note="+element["Note"];
+                        a.href ="note.html?id="+x+"&title="+element["Title"]+"&note="+element["Note"]+"&url="+element["URL"];
                         a.innerText = element["Title"];
 
                         notesDiv.appendChild(a); 

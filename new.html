@@ -10,7 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-   
+    
 </head>
 
 <body>
@@ -31,6 +31,10 @@
 
         <div class="w3-center">
             <button class="button" id="save" onclick="save()">Save</button>
+        </div>
+
+        <div class="w3-center">
+            <p id="status"></p>
         </div>
     </div>
 
@@ -57,7 +61,7 @@
             var uuid = guid();
 
             var db = firebase.database();
-            db.ref('Notes').push({
+            db.ref('Notes/'+sessionStorage.getItem("uid")).push({
                 Title: title,
                 Note: note,
                 UUID: uuid,
@@ -74,10 +78,14 @@
             let worker = rootRef.put(file);
             worker.on('state_changed',
                 (progress) => {
+                    console.log(progress);
+                    document.getElementById("status").innerHTML = progress["h"] + ' kb uploaded...';
                     console.log('progress')
                 }, (error) => {
                     console.log('error')
                 }, (success) => {
+
+                    document.getElementById("status").innerHTML = 'Uploaded!';
                     console.log('success')
 
                     worker.snapshot.ref.getDownloadURL().then(function (downloadURL) {

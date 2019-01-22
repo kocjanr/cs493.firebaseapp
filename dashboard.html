@@ -9,7 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
     <script src=”https://apis.google.com/js/platform.js" async defer></script>
-   
+    
 
 </head>
 
@@ -42,7 +42,7 @@
                         var element = response[x];
                         
                         var a = document.createElement("a");
-                        a.href ="note.html?id="+x+"&title="+element["Title"]+"&note="+element["Note"];
+                        a.href ="note.html?id="+x+"&title="+element["Title"]+"&note="+element["Note"]+"&url="+element["URL"];
                         a.innerText = element["Title"];
 
                         notesDiv.appendChild(a); 
